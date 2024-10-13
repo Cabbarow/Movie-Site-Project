@@ -29,7 +29,7 @@ function Navbar() {
   return (
     <AppBar
       position="sticky"
-      sx={{ bgcolor: "#121829", opacity: "1.5", paddingX: "30px" }}
+      sx={{ bgcolor: "#121829", opacity: "1.5", paddingX: "40px" }}
     >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
