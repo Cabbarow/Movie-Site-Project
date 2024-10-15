@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { MainUrl } from "../constant";
 import { Typography } from "@mui/material";
 import RatingTag from "./RatingTag";
+import { FaExternalLinkAlt } from "react-icons/fa";
 
 const MovieDetailPage = () => {
   const [selectedMovie, setSelectedMovie] = useState<any>();
@@ -25,11 +26,9 @@ const MovieDetailPage = () => {
           options
         );
         const data = await response.json();
-        console.log(data, "data");
         setSelectedMovie(data);
         console.log(selectedMovie);
       } catch (err) {
-        console.log("hata");
         console.log(err);
       }
     };
@@ -38,8 +37,7 @@ const MovieDetailPage = () => {
   }, []);
 
   if (!selectedMovie) return null;
-
-  console.log(selectedMovie, "seçilenfilm");
+  console.log(selectedMovie);
   const url = MainUrl + selectedMovie.poster_path;
   const url2 = MainUrl + selectedMovie.backdrop_path;
 
@@ -68,23 +66,46 @@ const MovieDetailPage = () => {
             <span className="line-clamp-5"> {selectedMovie.overview}</span>
           </Typography>
           <Typography>
-            <span>{selectedMovie.release_date}(Release Date)</span>
+            <span>
+              {selectedMovie.release_date}
+              <span style={{ opacity: "0.5" }}>(Release Date)</span>
+            </span>
           </Typography>
           <Typography>
             <span>
-              {selectedMovie.original_language === "en" ? "English" : "Other"}
-              (Original Language)
+              {selectedMovie.original_language.toUpperCase()}
+              <span style={{ opacity: "0.5" }}>(Original Language)</span>
+            </span>
+          </Typography>
+          <Typography>
+            <span>
+              {selectedMovie.genres.map((genre: any) => (
+                <span>{genre.name} </span>
+              ))}
+              <span style={{ opacity: "0.5" }}>(Genres)</span>
             </span>
           </Typography>
           <Typography>
             <span>
               {selectedMovie.popularity}
-              (Popularity)
+              <span style={{ opacity: "0.5" }}>(Popularity)</span>
             </span>
+          </Typography>
+          <Typography>
+            <a
+              href={selectedMovie.homepage}
+              style={{ display: "flex", gap: "10px", alignContent: "center" }}
+              target="_blank"
+            >
+              <FaExternalLinkAlt style={{ marginTop: "2px" }} /> Home Page
+            </a>
           </Typography>
           <Typography className="!-mx-3 flex">
             <RatingTag rating={selectedMovie.vote_average} />
-            <span className="mt-3 ">{`from ${selectedMovie.vote_count} vote`}</span>
+            <span
+              className="mt-3 "
+              style={{ opacity: "0.5" }}
+            >{`from ${selectedMovie.vote_count} vote`}</span>
           </Typography>
         </div>
       </div>
