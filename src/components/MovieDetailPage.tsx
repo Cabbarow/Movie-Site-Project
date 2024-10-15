@@ -1,17 +1,44 @@
-import { useContext } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { MyContext } from "../context";
 import { MainUrl } from "../constant";
 import { Typography } from "@mui/material";
 import RatingTag from "./RatingTag";
 
 const MovieDetailPage = () => {
-  const { movies } = useContext(MyContext);
-
+  const [selectedMovie, setSelectedMovie] = useState<any>();
   const { id } = useParams();
-  const selectedMovie = movies.find(
-    (selectedMovie) => selectedMovie.id === Number(id)
-  );
+
+  useEffect(() => {
+    const fetchMovie = async () => {
+      const options = {
+        method: "GET",
+        headers: {
+          accept: "application/json",
+          Authorization:
+            "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1ZTAzYjViYTRmY2I5ZTUwZDU5NWYwMjQzODIzZjU0MSIsIm5iZiI6MTcyODQyMTc4NS4zNzE1MTEsInN1YiI6IjY3MDU5YzcxYWJmOGVkODU2NTc3ODk2YSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.60BpdQgrLkmiwcq5tka5GIHYiyvfujjjc1Pj2EKRR48",
+        },
+      };
+
+      try {
+        const response = await fetch(
+          `https://api.themoviedb.org/3/movie/${id}`,
+          options
+        );
+        const data = await response.json();
+        console.log(data, "data");
+        setSelectedMovie(data);
+        console.log(selectedMovie);
+      } catch (err) {
+        console.log("hata");
+        console.log(err);
+      }
+    };
+
+    fetchMovie();
+  }, [id]);
+
+  if (!selectedMovie) return null;
+
   console.log(selectedMovie, "seçilenfilm");
   const url = MainUrl + selectedMovie.poster_path;
   const url2 = MainUrl + selectedMovie.backdrop_path;
