@@ -35,7 +35,7 @@ const MovieDetailPage = () => {
     };
 
     fetchMovie();
-  }, [id]);
+  }, []);
 
   if (!selectedMovie) return null;
 
