@@ -6,7 +6,7 @@ const RatingTag = ({ rating }: { rating: number }) => {
       <span className="flex items-center justify-center">
         <FaRegStar className="w-[16px] h-[16px]" />
       </span>
-      <p className="w-[11px] h-[24px]">{rating.toFixed(1)}</p>
+      <p className="w-[11px] h-[24px]">{rating?.toFixed(1)}</p>
     </div>
   );
 };

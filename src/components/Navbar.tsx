@@ -93,6 +93,7 @@ function Navbar() {
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
               <Button
+                href="/"
                 key={page}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: "#767e94", display: "block" }}

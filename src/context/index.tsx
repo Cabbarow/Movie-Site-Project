@@ -8,14 +8,22 @@ const MyContext = createContext<myDataType>({
 });
 
 const MyContextProvider = ({ children }: { children: ReactNode }) => {
-  const [movies, setMovies] = useState([]);
-
-  const url =
-    "https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc";
+  const [movies, setMovies] = useState<any>([]);
+  const [page, setPage] = useState<number>(1);
+  const [loading, setLoading] = useState(false);
+  const addMore = () => {
+    if (page < 30) {
+      setPage(page + 1);
+    } else {
+      return page;
+    }
+  };
 
   useEffect(() => {
-    const fetchMovies = async () => {
-      try {
+    if (page && !loading) {
+      setLoading(true);
+      const fetchMovies = async () => {
+        const url = `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=${page}&sort_by=popularity.desc`;
         const response = await fetch(url, {
           method: "GET",
           headers: {
@@ -24,20 +32,29 @@ const MyContextProvider = ({ children }: { children: ReactNode }) => {
               "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1ZTAzYjViYTRmY2I5ZTUwZDU5NWYwMjQzODIzZjU0MSIsIm5iZiI6MTcyODQyMTc4NS4zNzE1MTEsInN1YiI6IjY3MDU5YzcxYWJmOGVkODU2NTc3ODk2YSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.60BpdQgrLkmiwcq5tka5GIHYiyvfujjjc1Pj2EKRR48",
           },
         });
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        const data = await response.json();
-        setMovies(data.results);
-      } catch (error) {
-        console.log(error);
-      }
-    };
 
-    fetchMovies();
-  }, []);
+        return response.json();
+      };
 
-  return <MyContext.Provider value={{ movies }}>{children}</MyContext.Provider>;
+      fetchMovies()
+        .then((response) => {
+          console.log(response);
+
+          setMovies((prev) => {
+            if (prev.length > 0) return [...prev, ...response.results];
+            else return response.results;
+          });
+        })
+        .catch((err) => console.log("error mq", err))
+        .finally(() => setLoading(false));
+    }
+  }, [page]);
+
+  return (
+    <MyContext.Provider value={{ movies, addMore }}>
+      {children}
+    </MyContext.Provider>
+  );
 };
 
 export { MyContext, MyContextProvider };

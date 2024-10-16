@@ -66,30 +66,25 @@ const MovieDetailPage = () => {
             <span className="line-clamp-5"> {selectedMovie.overview}</span>
           </Typography>
           <Typography>
-            <span>
-              {selectedMovie.release_date}
-              <span style={{ opacity: "0.5" }}>(Release Date)</span>
-            </span>
+            <span>{selectedMovie.runtime} min.</span>
           </Typography>
           <Typography>
-            <span>
-              {selectedMovie.original_language.toUpperCase()}
-              <span style={{ opacity: "0.5" }}>(Original Language)</span>
-            </span>
+            <span>{selectedMovie.release_date}</span>
+            <span style={{ opacity: "0.5" }}>(Release Date)</span>
           </Typography>
           <Typography>
-            <span>
-              {selectedMovie.genres.map((genre: any) => (
-                <span>{genre.name} </span>
-              ))}
-              <span style={{ opacity: "0.5" }}>(Genres)</span>
-            </span>
+            <span>{selectedMovie.original_language.toUpperCase()}</span>
+            <span style={{ opacity: "0.5" }}>(Original Language)</span>
           </Typography>
           <Typography>
-            <span>
-              {selectedMovie.popularity}
-              <span style={{ opacity: "0.5" }}>(Popularity)</span>
-            </span>
+            {selectedMovie.genres.map((genre: any) => (
+              <span key={genre.name}>{genre.name} </span>
+            ))}
+            <span style={{ opacity: "0.5" }}>(Genres)</span>
+          </Typography>
+          <Typography>
+            <span>{selectedMovie.popularity}</span>
+            <span style={{ opacity: "0.5" }}>(Popularity)</span>
           </Typography>
           <Typography>
             <a

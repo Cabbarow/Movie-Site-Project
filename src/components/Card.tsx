@@ -4,8 +4,7 @@ import RatingTag from "./RatingTag";
 
 const Card = ({ movie }: { movie: any }) => {
   const url = MainUrl + movie.poster_path;
-  console.log(url, "url", typeof url);
-  console.log(movie);
+
   return (
     <>
       <div className="overflow-hidden relative max-h-[480px] m-2 p-2 z-20 rounded-md bg-[#20283ECC] text-white">
@@ -13,7 +12,7 @@ const Card = ({ movie }: { movie: any }) => {
           <img
             src={url}
             alt={movie?.name}
-            className="w-full h-full rounded-md hover:scale-[1.1] transition-transform"
+            className="w-full h-full rounded-md hover:scale-[1.1] transition-transform aspect-[2/3]"
           />
         </div>
 
