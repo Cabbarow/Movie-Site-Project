@@ -30,6 +30,7 @@ function Navbar() {
     <AppBar
       position="sticky"
       sx={{ bgcolor: "#121829", opacity: "1.5", paddingX: "40px" }}
+      className="max-[480px]:px-1 px-24"
     >
       <Container maxWidth="xl">
         <Toolbar disableGutters>

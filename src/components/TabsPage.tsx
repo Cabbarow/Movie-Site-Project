@@ -1,89 +1,39 @@
-import * as React from "react";
-import Box from "@mui/material/Box";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
-import { Stack } from "@mui/material";
+import { Button, Stack, Typography } from "@mui/material";
+import { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 
-function samePageLinkNavigation(
-  event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
-) {
-  if (
-    event.defaultPrevented ||
-    event.button !== 0 || // ignore everything but left-click
-    event.metaKey ||
-    event.ctrlKey ||
-    event.altKey ||
-    event.shiftKey
-  ) {
-    return false;
-  }
-  return true;
-}
-
-interface LinkTabProps {
-  label?: string;
-  href?: string;
-  selected?: boolean;
-}
-
-function LinkTab(props: LinkTabProps) {
-  return (
-    <Tab
-      className={`${
-        props.selected ? "!bg-[#7c6ef6] !text-[#ebe9fe]" : ""
-      }  !rounded-xl !my-2 !mx-4 !p-2 !text-[#767e94] !font-bold`}
-      component="a"
-      onClick={(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
-        if (samePageLinkNavigation(event)) {
-          event.preventDefault();
-        }
-      }}
-      aria-current={props.selected && "page"}
-      {...props}
-    />
-  );
-}
-
-export default function TabsPage() {
-  const [value, setValue] = React.useState(0);
-
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    // event.type can be equal to focus with selectionFollowsFocus.
-    if (
-      event.type !== "click" ||
-      (event.type === "click" &&
-        samePageLinkNavigation(
-          event as React.MouseEvent<HTMLAnchorElement, MouseEvent>
-        ))
-    ) {
-      setValue(newValue);
-    }
-  };
+const TabsPage = () => {
+  const location = useLocation();
+  const [value, setValue] = useState(location.pathname === "/series" ? 1 : 0);
 
   return (
-    <Stack
-      className="w-[360px] h-[50px] my-10 border-none"
-      visibility={"visible"}
-      sx={{ "MuiBox-root": "width:auto !important" }}
-    >
-      <Box
-        sx={{ width: "100%", background: "#00000033", borderRadius: "12px" }}
-      >
-        <Tabs
-          sx={{ display: "flex" }}
-          value={value}
-          onChange={handleChange}
-          aria-label="nav tabs example"
-          role="navigation"
-          TabIndicatorProps={{
-            style: { display: "none" },
-          }}
-        >
-          <LinkTab label="All" href="/" />
-          <LinkTab label="Movies" href="/" />
-          <LinkTab label="Series" href="/" />
-        </Tabs>
-      </Box>
-    </Stack>
+    <div className="flex justify-center items-center text-lg border-[2px] border-solid border-[#20283e] rounded-lg focus:ring-blue-500 focus:border-blue-500 focus-visible:outline-none w-52 h-14 my-3">
+      <Stack className=" text-[#61697f]" direction="row" spacing={2}>
+        <Typography>
+          <Link className="font-extrabold" to={"/"}>
+            <Button
+              onClick={() => setValue(0)}
+              variant={value === 0 ? "contained" : "outlined"}
+            >
+              MOVIES
+            </Button>
+          </Link>
+        </Typography>
+        <Typography>
+          <Link to={"/series"}>
+            <Button
+              onClick={() => {
+                setValue(1);
+              }}
+              variant={value === 1 ? "contained" : "outlined"}
+            >
+              SERIES
+            </Button>
+          </Link>
+        </Typography>
+      </Stack>
+    </div>
   );
-}
+};
+
+export default TabsPage;

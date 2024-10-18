@@ -20,7 +20,7 @@ const Card = ({ movie }: { movie: any }) => {
           <RatingTag rating={movie?.vote_average} />
         </div>
 
-        <MovieName movieName={movie?.title} />
+        <MovieName movieName={movie?.title || movie?.name} />
       </div>
     </>
   );
