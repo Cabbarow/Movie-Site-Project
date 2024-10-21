@@ -59,18 +59,15 @@ const SerieDetailPage = () => {
         <div className="text-[#61697f] grid sm:my-3 m-3">
           <Typography className="!mb-4 ">
             <span className="gradientText2 font-extrabold text-2xl">
-              {selectedSerie.original_title}
+              {selectedSerie.name}
             </span>
           </Typography>
           <Typography>
             <span className="line-clamp-5"> {selectedSerie.overview}</span>
           </Typography>
           <Typography>
-            <span>{selectedSerie.runtime} min.</span>
-          </Typography>
-          <Typography>
-            <span>{selectedSerie.release_date}</span>
-            <span style={{ opacity: "0.5" }}>(Release Date)</span>
+            <span>{selectedSerie.first_air_date}</span>
+            <span style={{ opacity: "0.5" }}>(First Release Date)</span>
           </Typography>
           <Typography>
             <span>{selectedSerie.original_language.toUpperCase()}</span>
@@ -86,7 +83,7 @@ const SerieDetailPage = () => {
             <span>{selectedSerie.popularity}</span>
             <span style={{ opacity: "0.5" }}>(Popularity)</span>
           </Typography>
-          <Typography>
+          <Typography className="text-[#7373e5] animate-pulse">
             <a
               href={selectedSerie.homepage}
               style={{ display: "flex", gap: "10px", alignContent: "center" }}

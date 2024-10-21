@@ -1,4 +1,9 @@
+import { useContext, useState } from "react";
+import { MyContext } from "../context";
+
 const Input = () => {
+  const { setSearchItem } = useContext(MyContext);
+
   return (
     <div className="relative ">
       <div className="absolute -inset-y-1 h-16 start-0 flex items-center justify-center ps-3 pointer-events-none">
@@ -22,8 +27,9 @@ const Input = () => {
         type="search"
         id="default-search"
         className="block !bg-[rgba(0,0,0,.1)] text-[#767e94] w-[360px] h-14 p-1 ps-10 text-lg border-[2px] border-solid border-[#20283e] rounded-lg focus:ring-blue-500 focus:border-blue-500 focus-visible:outline-none"
-        placeholder="Filmlerde Ara..."
+        placeholder="Search..."
         required
+        onChange={(e) => setSearchItem(e.target.value)}
       />
     </div>
   );

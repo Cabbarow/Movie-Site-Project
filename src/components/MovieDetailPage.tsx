@@ -86,7 +86,7 @@ const MovieDetailPage = () => {
             <span>{selectedMovie.popularity}</span>
             <span style={{ opacity: "0.5" }}>(Popularity)</span>
           </Typography>
-          <Typography>
+          <Typography className="text-[#7373e5] animate-pulse">
             <a
               href={selectedMovie.homepage}
               style={{ display: "flex", gap: "10px", alignContent: "center" }}

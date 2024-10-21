@@ -3,10 +3,12 @@ import { createContext, ReactNode, useEffect, useState } from "react";
 interface myDataType {
   movies: any[];
   series: any[];
+  searchItem: string;
 }
 const MyContext = createContext<myDataType>({
   movies: [],
   series: [],
+  searchItem: "",
 });
 
 const MyContextProvider = ({ children }: { children: ReactNode }) => {
@@ -15,6 +17,8 @@ const MyContextProvider = ({ children }: { children: ReactNode }) => {
   const [page, setPage] = useState<number>(1);
   const [seriePage, setSeriePage] = useState<number>(1);
   const [loading, setLoading] = useState(false);
+  const [searchItem, setSearchItem] = useState("");
+
   const addMore = () => {
     if (page < 30) {
       setPage(page + 1);
@@ -93,7 +97,16 @@ const MyContextProvider = ({ children }: { children: ReactNode }) => {
   }, [seriePage]);
 
   return (
-    <MyContext.Provider value={{ movies, series, addMore, addMoreSeries }}>
+    <MyContext.Provider
+      value={{
+        movies,
+        series,
+        addMore,
+        addMoreSeries,
+        setSearchItem,
+        searchItem,
+      }}
+    >
       {children}
     </MyContext.Provider>
   );

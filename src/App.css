@@ -12,3 +12,16 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
+
+.css-1abvrni-MuiButtonBase-root-MuiButton-root{
+  background-color: #243b8a !important;
+}
+
+.css-1588512-MuiButtonBase-root-MuiButton-root{
+  color: #5aadff !important;
+  font-weight: bold !important;
+}
+
+.MuiButtonBase-root{
+  font-weight: bold !important;
+}

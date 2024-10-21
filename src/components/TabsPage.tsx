@@ -13,7 +13,7 @@ const TabsPage = () => {
           <Link className="font-extrabold" to={"/"}>
             <Button
               onClick={() => setValue(0)}
-              variant={value === 0 ? "contained" : "outlined"}
+              variant={value === 0 ? "contained" : "text"}
             >
               MOVIES
             </Button>
@@ -25,7 +25,7 @@ const TabsPage = () => {
               onClick={() => {
                 setValue(1);
               }}
-              variant={value === 1 ? "contained" : "outlined"}
+              variant={value === 1 ? "contained" : "text"}
             >
               SERIES
             </Button>
