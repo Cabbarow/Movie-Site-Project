@@ -11,4 +11,5 @@ export default defineConfig({
       input: '/index.html', 
     },
   },
+  base:'/movie-site/',
 });
