@@ -1,10 +1,10 @@
 import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
-import { MyContextProvider } from "./context/index.tsx";
+import { MovieProvider } from "./context/index.tsx";
 
 createRoot(document.getElementById("root")!).render(
-  <MyContextProvider>
+  <MovieProvider>
     <App />
-  </MyContextProvider>
+  </MovieProvider>
 );

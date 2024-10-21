@@ -1,8 +1,8 @@
-import { useContext, useState } from "react";
-import { MyContext } from "../context";
+import { useContext } from "react";
+import { MovieContext } from "../context";
 
 const Input = () => {
-  const { setSearchItem } = useContext(MyContext);
+  const { setSearchItem } = useContext(MovieContext);
 
   return (
     <div className="relative ">

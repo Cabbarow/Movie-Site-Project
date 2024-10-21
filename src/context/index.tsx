@@ -1,17 +1,23 @@
 import { createContext, ReactNode, useEffect, useState } from "react";
 
-interface myDataType {
+interface IMovieListContext {
   movies: any[];
   series: any[];
   searchItem: string;
+  setSearchItem: (string: string) => void;
+  addMore: () => void;
+  addMoreSeries: () => void;
 }
-const MyContext = createContext<myDataType>({
+const MovieContext = createContext<IMovieListContext>({
   movies: [],
   series: [],
   searchItem: "",
+  addMore: () => {},
+  addMoreSeries: () => {},
+  setSearchItem: () => {},
 });
 
-const MyContextProvider = ({ children }: { children: ReactNode }) => {
+const MovieProvider = ({ children }: { children: ReactNode }) => {
   const [movies, setMovies] = useState<any>([]);
   const [series, setSeries] = useState<any>([]);
   const [page, setPage] = useState<number>(1);
@@ -97,7 +103,7 @@ const MyContextProvider = ({ children }: { children: ReactNode }) => {
   }, [seriePage]);
 
   return (
-    <MyContext.Provider
+    <MovieContext.Provider
       value={{
         movies,
         series,
@@ -108,8 +114,8 @@ const MyContextProvider = ({ children }: { children: ReactNode }) => {
       }}
     >
       {children}
-    </MyContext.Provider>
+    </MovieContext.Provider>
   );
 };
 
-export { MyContext, MyContextProvider };
+export { MovieContext, MovieProvider };

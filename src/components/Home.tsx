@@ -2,13 +2,13 @@ import "../App.css";
 import "../index.css";
 
 import { useContext } from "react";
-import { MyContext } from "../context";
+import { MovieContext } from "../context";
 import Card from "./Card";
 import { Link } from "react-router-dom";
 import { Button } from "@mui/material";
 
 function Home() {
-  const { movies, addMore, searchItem } = useContext(MyContext);
+  const { movies, addMore, searchItem } = useContext(MovieContext);
 
   const handleClick = () => {
     addMore();
