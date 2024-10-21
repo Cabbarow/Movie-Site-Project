@@ -8,7 +8,7 @@ export default defineConfig({
     outDir: 'dist',       
     sourcemap: false,      
     rollupOptions: {
-      input: '/index.html', 
+      input: './index.html', 
     },
   },
   base:'./movie-site',
