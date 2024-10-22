@@ -7,14 +7,21 @@ import Layout from "./components/Layout";
 import Series from "./components/Series";
 import SerieDetailPage from "./components/SerieDetailsPage";
 
+const isProd = import.meta.env.MODE === "production";
+const basePath = isProd ? "/movie-site/" : "/";
+
+console.log(isProd, "isProd");
+console.log(basePath, "base path");
+console.log(`${basePath}series`, "series path");
+
 function App() {
   return (
     <>
-      <BrowserRouter>
+      <BrowserRouter basename={`${basePath}`}>
         <Routes>
-          <Route path="/" element={<Layout />}>
+          <Route element={<Layout />}>
             <Route index element={<Home />} />
-            <Route path="/series" element={<Series />} />
+            <Route path={`/series`} element={<Series />} />
           </Route>
           <Route path="/moviedetails/:id" element={<MovieDetailPage />} />
           <Route path="/seriedetails/:id" element={<SerieDetailPage />} />

@@ -1,15 +1,21 @@
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
+import { defineConfig, loadEnv } from "vite";
+import react from "@vitejs/plugin-react";
 
-// https://vitejs.dev/config/
-export default defineConfig({
-  plugins: [react()],
-  build: {
-    outDir: 'dist',       
-    sourcemap: false,      
-    rollupOptions: {
-      input: './index.html', 
+export default defineConfig(({ mode }) => {
+  console.log(mode, "mode");
+  const env = loadEnv(mode, process.cwd(), "");
+  return {
+    plugins: [react()],
+    build: {
+      outDir: "dist",
+      sourcemap: false,
+      rollupOptions: {
+        input: "./index.html",
+      },
     },
-  },
-  base:'/movie-site/',
+    define: {
+      __APP_ENV__: env.APP_ENV,
+    },
+    base: mode === "production" ? "/movie-site/" : "/", // Production'da /movie-site/, yerelde /
+  };
 });
