@@ -7,7 +7,7 @@ import Layout from "./components/Layout";
 import Series from "./components/Series";
 import SerieDetailPage from "./components/SerieDetailsPage";
 
-const isProd = import.meta.env.MODE === "production";
+const isProd = import.meta.env.PROD;
 const basePath = isProd ? "/movie-site/" : "/";
 
 console.log(isProd, "isProd");
