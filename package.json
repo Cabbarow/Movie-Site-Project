@@ -1,5 +1,5 @@
 {
-  "homepage": "https://cabbarow.github.io/movie-site",
+  "homepage": "https://Cabbarow.github.io/movie-site",
   "name": "movie-site",
   "private": true,
   "version": "0.0.0",
@@ -9,8 +9,8 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "predeploy": "yarn build",
-    "deploy": "gh-pages -d dist"
+    "predeploy": "yarn run build",
+    "deploy": "gh-pages -d build"
   },
   "dependencies": {
     "@emotion/react": "^11.13.3",
